@@ -2,8 +2,13 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.floorLight0, function (sp
     mySprite.sayText(":)")
     music.pewPew.play()
 })
+scene.onOverlapTile(SpriteKind.Projectile, sprites.dungeon.floorLight3, function (sprite, location) {
+    game.over(false)
+    info.stopCountdown()
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (controller.dx() != 0 || controller.dy() != 0) {
+        music.pewPew.play()
         projectile = sprites.createProjectileFromSprite(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -21,7 +26,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
-            `, mySprite, controller.dx(1000), controller.dy(1000))
+            `, mySprite, controller.dx(10000), controller.dy(10000))
     }
 })
 scene.onOverlapTile(SpriteKind.Projectile, sprites.dungeon.floorLight0, function (sprite, location) {
@@ -78,6 +83,10 @@ mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite)
 tiles.setTilemap(tilemap`level1`)
+let goalx = randint(1, 31)
+let goaly = randint(1, 31)
+tiles.setTileAt(tiles.getTileLocation(goalx, goaly), sprites.dungeon.floorLight3)
+tiles.setWallAt(tiles.getTileLocation(goalx, goaly), false)
 tiles.placeOnRandomTile(mySprite, sprites.dungeon.stairLadder)
 scene.cameraFollowSprite(mySprite)
 info.startCountdown(120)
