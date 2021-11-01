@@ -55,6 +55,7 @@ scene.onHitWall(SpriteKind.Projectile, function (sprite, location) {
         . 4 5 4 . . 4 4 4 . . . 4 4 . . 
         . 4 4 . . . . . . . . . . 4 4 . 
         `)
+    controller.vibrate(100)
     projectile.setVelocity(0, 0)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.floorLight3, function (sprite, location) {

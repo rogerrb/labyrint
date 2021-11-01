@@ -2,7 +2,8 @@
     "name": "Labyrint for de utålmodige",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "controller": "*"
     },
     "files": [
         "main.blocks",
