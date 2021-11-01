@@ -28,6 +28,10 @@ scene.onOverlapTile(SpriteKind.Projectile, sprites.dungeon.floorLight0, function
 	
 })
 scene.onHitWall(SpriteKind.Projectile, function (sprite, location) {
+    tiles.setTileAt(location, sprites.dungeon.darkGroundNorthWest0)
+    tiles.setWallAt(location, false)
+    music.smallCrash.play()
+    projectile.destroy(effects.spray, 500)
     projectile.setImage(img`
         . 3 . . . . . . . . . . . 4 . . 
         . 3 3 . . . . . . . . . 4 4 . . 
@@ -47,10 +51,6 @@ scene.onHitWall(SpriteKind.Projectile, function (sprite, location) {
         . 4 4 . . . . . . . . . . 4 4 . 
         `)
     projectile.setVelocity(0, 0)
-    tiles.setTileAt(location, sprites.dungeon.darkGroundNorthWest0)
-    tiles.setWallAt(location, false)
-    music.smallCrash.play()
-    projectile.destroy(effects.spray, 500)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.floorLight3, function (sprite, location) {
     game.over(true)
